@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DCF 估值計算 — Nick's Stock Cafe</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="container">
+      <h1>DCF 估值計算 — Nick's Stock Cafe</h1>
+      <p class="subtitle">輸入參數以估算公司合理價值與股價</p>
+    </header>
+
+    <main class="container">
+      <section class="grid">
+        <div class="grid-left">
+          <div class="row header green">
+            <label for="company"><strong>Company</strong></label>
+            <input id="company" type="text" placeholder="公司名稱" />
+          </div>
+
+          <div class="row green">
+            <label for="g15">未來成長率（1~5年）%</label>
+            <input id="g15" type="number" step="0.1" placeholder="例如 12" />
+          </div>
+
+          <div class="row green">
+            <label for="gperp">永久成長率（終值）%</label>
+            <input id="gperp" type="number" step="0.1" placeholder="例如 2.5" />
+          </div>
+
+          <div class="row yellow">
+            <label for="wacc">折現率（WACC）%</label>
+            <input id="wacc" type="number" step="0.1" placeholder="例如 10" />
+          </div>
+
+          <div class="row pink">
+            <label for="reqReturn">期望折現率（期望收益率）%（可選）</label>
+            <input id="reqReturn" type="number" step="0.1" placeholder="可留空" />
+          </div>
+
+          <div class="row yellow">
+            <label for="hist5">過去五年成長率（資訊）%</label>
+            <input id="hist5" type="number" step="0.1" placeholder="可留空" />
+          </div>
+
+          <div class="row blue">
+            <label for="g610">二階成長率（6~10年）%</label>
+            <input id="g610" type="number" step="0.1" placeholder="例如 6" />
+          </div>
+        </div>
+
+        <div class="grid-right">
+          <div class="row header green">
+            <label for="revenue"><strong>TTM Revenue</strong></label>
+            <input id="revenue" type="number" step="0.01" placeholder="營收（同幣別）" />
+          </div>
+
+          <div class="row green">
+            <label for="revG15">營收成長（y1-5）%</label>
+            <input id="revG15" type="number" step="0.1" placeholder="例如 12" />
+          </div>
+
+          <div class="row green">
+            <label for="revG610">營收成長（y6-10）%</label>
+            <input id="revG610" type="number" step="0.1" placeholder="例如 6" />
+          </div>
+
+          <div class="row yellow">
+            <label for="fcfMargin">ATH FCF M（自由現金流率）%</label>
+            <input id="fcfMargin" type="number" step="0.1" placeholder="例如 20" />
+          </div>
+
+          <div class="row yellow">
+            <label for="fcfYear1">自由現金流（第一年，手動）</label>
+            <input id="fcfYear1" type="number" step="0.01" placeholder="例如 413.7" />
+          </div>
+
+          
+
+          <div class="row gray">
+            <label for="cash">現金及其他投資</label>
+            <input id="cash" type="number" step="0.01" placeholder="可留空=0" />
+          </div>
+
+          <div class="row gray">
+            <label for="debt">總負債</label>
+            <input id="debt" type="number" step="0.01" placeholder="可留空=0" />
+          </div>
+
+          <div class="row gray">
+            <label for="shares">流通在外股數</label>
+            <input id="shares" type="number" step="0.0001" placeholder="例如 1000000000" />
+          </div>
+
+          <div class="row gray">
+            <label for="startYear">起始年份</label>
+            <input id="startYear" type="number" step="1" value="" placeholder="預設為今年" />
+          </div>
+
+          <div class="row pink">
+            <label for="marketPrice">股票當前價格</label>
+            <input id="marketPrice" type="number" step="0.01" placeholder="可留空" />
+          </div>
+        </div>
+      </section>
+
+      <section class="actions">
+        <button id="calcBtn">計算估值</button>
+        <button id="resetBtn" class="secondary">清除</button>
+      </section>
+
+      <section id="results" class="results hidden">
+        <h2>結果</h2>
+        <!-- 簡化：暫不顯示細項彙總（起始FCF/現值總和/終值/EV/股權/每股合理價） -->
+
+        <div class="cards">
+          <div class="card fair">
+            <div class="title">合理價</div>
+            <div class="value" id="resFairCard">—</div>
+          </div>
+          <div class="card market">
+            <div class="title">市價</div>
+            <div class="value" id="resMarketCard">—</div>
+          </div>
+          <div class="card mos">
+            <div class="title">安全邊際</div>
+            <div class="value" id="resMOS">—</div>
+          </div>
+          <div class="card action" id="resAction">—</div>
+        </div>
+
+        <details class="projections" id="projectionsDetails">
+          <summary>展開查看 10 年 FCF 預估與折現</summary>
+          <div id="projectionTable"></div>
+        </details>
+      </section>
+    </main>
+
+    <footer class="container footer">
+      <small>僅供估值研究，非投資建議。</small>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+  </html>
