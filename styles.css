@@ -51,6 +51,9 @@ h1 { margin: 16px 0 4px; }
   width: auto;
 }
 
+.unit-note { font-size: 12px; color: #64748b; margin: -2px 0 6px 2px; }
+.unit-tag { margin-left: 6px; font-size: 11px; color: #334155; background: #e2e8f0; border-radius: 9999px; padding: 2px 6px; }
+
 .group { background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 8px; display: grid; gap: 8px; margin-top: 0; }
 
 
@@ -146,12 +149,12 @@ button.secondary { background: #e5e7eb; }
   border-width: 3px;
 }
 
-.gauge {
-  margin-top: 12px;
-}
+.gauge { margin-top: 0; }
 .gauge.hidden { display: none; }
-.gauge svg { width: 100%; max-width: 720px; height: auto; display: block; margin: 0 auto; }
-.gauge .caption { text-align: center; margin-top: 4px; font-weight: 700; }
+.gauge svg { width: 100%; max-width: 720px; height: auto; display: block; margin: 0 auto 0; }
+.gauge .caption { text-align: center; margin-top: -70px; font-weight: 700; }
+
+.tool-row { display: flex; gap: 8px; justify-content: center; margin: 6px 0 4px; }
 
 .chart-wrap { margin-top: 16px; background: #fff; border: 1px solid #eee; border-radius: 8px; padding: 10px 12px; }
 .chart-wrap h3 { margin: 4px 0 10px; }
@@ -165,6 +168,7 @@ button.secondary { background: #e5e7eb; }
   border-radius: 8px;
   padding: 8px 12px;
 }
+.projections h2 { margin: 8px 0 8px; }
 
 table.proj {
   width: 100%;
@@ -176,6 +180,19 @@ table.proj th, table.proj td {
   text-align: right;
 }
 table.proj th:first-child, table.proj td:first-child { text-align: left; }
+
+/* Zebra striping + hover 高亮，提升可讀性 */
+table.proj tbody tr:nth-child(odd) { background: #f9fafb; }
+table.proj tbody tr:nth-child(even) { background: #ffffff; }
+table.proj tbody tr:hover { background: #eef2ff; }
+
+/* Sticky header 在表格捲動時保持可見 */
+table.proj thead th {
+  position: sticky;
+  top: 0;
+  background: #f3f4f6;
+  z-index: 1;
+}
 
 .footer { color: #666; }
 

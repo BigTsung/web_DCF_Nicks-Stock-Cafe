@@ -20,23 +20,23 @@
           <div class="group">
             <div class="row header green" id="companyRow">
             <label for="company" class="label-required"><strong>Company</strong></label>
-              <input id="company" type="text" placeholder="公司名稱" />
+              <input id="company" type="text" placeholder="公司代號" />
             </div>
             <div class="row green" id="g15Row">
               <label for="g15" class="label-required">未來成長率（1~5年）%</label>
-              <input id="g15" type="number" step="0.1" placeholder="例如 12" />
+              <input id="g15" type="number" step="0.1" placeholder="" />
             </div>
             <div class="row green" id="gperpRow">
               <label for="gperp" class="label-required">永久成長率（終值）%</label>
-              <input id="gperp" type="number" step="0.1" placeholder="例如 2.5" />
+              <input id="gperp" type="number" step="0.1" placeholder="" />
             </div>
             <div class="row yellow" id="waccRow">
               <label for="wacc">折現率（WACC）%</label>
-              <input id="wacc" type="number" step="0.1" placeholder="例如 10" />
+              <input id="wacc" type="number" step="0.1" placeholder="可留空" />
             </div>
             <div class="row green" id="reqReturnRow">
-              <label for="reqReturn" class="label-required">期望折現率（期望收益率）%（可選）</label>
-              <input id="reqReturn" type="number" step="0.1" placeholder="可留空" />
+              <label for="reqReturn" class="label-required">期望折現率（期望收益率）%</label>
+              <input id="reqReturn" type="number" step="0.1" placeholder="" />
             </div>
             <div class="row yellow" id="hist5Row">
               <label for="hist5">過去五年成長率（資訊）%</label>
@@ -44,7 +44,7 @@
             </div>
             <div class="row blue" id="g610Row">
               <label for="g610" class="label-required">二階成長率（6~10年）%</label>
-              <input id="g610" type="number" step="0.1" placeholder="例如 6" />
+              <input id="g610" type="number" step="0.1" placeholder="" />
             </div>
           </div>
         </div>
@@ -52,22 +52,23 @@
         <!-- 右：財務基準與成長假設（span-6） -->
         <div class="section-card span-6">
           <h3 class="form-section">財務基準與成長假設</h3>
+          <!-- <div class="unit-note">Units: Millions USD</div> -->
           <div class="group">
             <div class="row header green" id="revenueRow">
-              <label for="revenue" class="label-required"><strong>TTM Revenue</strong></label>
-              <input id="revenue" type="number" step="0.01" placeholder="營收（同幣別）" />
+              <label for="revenue" class="label-required"><strong>TTM Revenue</strong><span class="unit-tag">Millions USD</span></label>
+              <input id="revenue" type="number" step="0.01" placeholder="" />
             </div>
             <div class="row green" id="revG15Row">
               <label for="revG15" class="label-required">營收成長（y1-5）%</label>
-              <input id="revG15" type="number" step="0.1" placeholder="例如 12" />
+              <input id="revG15" type="number" step="0.1" placeholder="" />
             </div>
             <div class="row green" id="revG610Row">
               <label for="revG610" class="label-required">營收成長（y6-10）%</label>
-              <input id="revG610" type="number" step="0.1" placeholder="例如 6" />
+              <input id="revG610" type="number" step="0.1" placeholder="" />
             </div>
             <div class="row yellow" id="fcfMarginRow">
               <label for="fcfMargin">ATH FCF M（自由現金流率）%</label>
-              <input id="fcfMargin" type="number" step="0.1" placeholder="例如 20" />
+              <input id="fcfMargin" type="number" step="0.1" placeholder="" />
             </div>
             <!-- 補齊空白列，讓本區與左側欄位數一致（共 7 列） -->
             <div class="row placeholder"><label></label><input type="text" disabled aria-hidden="true" /></div>
@@ -79,22 +80,23 @@
         <!-- 下：股權價值計算參數（span-12） -->
         <div class="section-card span-12">
           <h3 class="form-section">股權價值計算參數</h3>
+          <!-- <div class="unit-note">所有金額與股數的單位：Millions USD</div> -->
           <div class="group">
             <div class="row green" id="fcfYear1Row">
-              <label for="fcfYear1" class="label-required">自由現金流（第一年，手動）</label>
-              <input id="fcfYear1" type="number" step="0.01" placeholder="例如 413.7" />
+              <label for="fcfYear1" class="label-required">自由現金流（第一年，手動）<span class="unit-tag">Millions USD</span></label>
+              <input id="fcfYear1" type="number" step="0.01" placeholder="" />
             </div>
             <div class="row pink" id="cashRow">
-              <label for="cash" class="label-required">現金及其他投資</label>
-              <input id="cash" type="number" step="0.01" placeholder="可留空=0" />
+              <label for="cash" class="label-required">現金及其他投資<span class="unit-tag">Millions USD</span></label>
+              <input id="cash" type="number" step="0.01" placeholder="" />
             </div>
             <div class="row pink" id="debtRow">
-              <label for="debt" class="label-required">總負債</label>
-              <input id="debt" type="number" step="0.01" placeholder="可留空=0" />
+              <label for="debt" class="label-required">總負債<span class="unit-tag">Millions USD</span></label>
+              <input id="debt" type="number" step="0.01" placeholder="" />
             </div>
             <div class="row pink" id="sharesRow">
-              <label for="shares" class="label-required">流通在外股數</label>
-              <input id="shares" type="number" step="0.0001" placeholder="例如 1000000000" />
+              <label for="shares" class="label-required">流通在外股數<span class="unit-tag">Millions</span></label>
+              <input id="shares" type="number" step="0.0001" placeholder="" />
             </div>
             <div class="row pink" id="startYearRow">
               <label for="startYear" class="label-required">起始年份</label>
@@ -102,7 +104,7 @@
             </div>
             <div class="row pink" id="marketPriceRow">
               <label for="marketPrice" class="label-required">股票當前價格</label>
-              <input id="marketPrice" type="number" step="0.01" placeholder="可留空" />
+              <input id="marketPrice" type="number" step="0.01" placeholder="" />
             </div>
           </div>
         </div>
@@ -145,11 +147,13 @@
         </div>
 
         <div id="gaugeWrap" class="gauge hidden"></div>
+        <div class="tool-row"><button id="btnSaveGauge" class="secondary">下載儀表圖（PNG）</button></div>
 
-        <details class="projections" id="projectionsDetails">
-          <summary>展開查看 10 年 FCF 預估與折現</summary>
+        <section class="projections" id="projectionsBlock">
+          <h2>查看 10 年 FCF 預估與折現</h2>
+          <div class="tool-row" style="justify-content:flex-end"><button id="btnSaveTable" class="secondary">下載表格（PNG）</button></div>
           <div id="projectionTable"></div>
-        </details>
+        </section>
 
         <section class="chart-wrap">
           <h3>自由現金流</h3>
@@ -169,7 +173,8 @@
     </main>
 
     <footer class="container footer">
-      <small>僅供估值研究，非投資建議。</small>
+      <small>僅供估值研究，非投資建議。</small><br />
+      <small>估值方式參考：YouTube 頻道「美股咖啡館」— <a href="https://www.youtube.com/@nick_valueinvesting" target="_blank" rel="noopener noreferrer">@nick_valueinvesting</a>。感謝分享與啟發！</small>
     </footer>
 
     <script src="app.js"></script>

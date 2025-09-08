@@ -335,9 +335,7 @@ function calculateDCF() {
     if (wrap) wrap.classList.add('hidden');
   }
 
-  // 計算後自動展開明細，並捲動到「結果」區塊頂部
-  const det = document.getElementById('projectionsDetails');
-  if (det) det.open = true;
+  // 計算後自動捲動到「結果」區塊頂部
   const resultsEl = document.getElementById('results');
   if (resultsEl) resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
@@ -379,4 +377,84 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   //（已回退：不提供每列配色控制）
+
+  // 下載儀表圖（將 SVG 轉 PNG）
+  function companySlug() {
+    const el = document.getElementById('company');
+    const raw = (el && el.value ? el.value : 'company').trim();
+    const slug = raw ? raw.replace(/[^a-z0-9_-]+/gi, '-').replace(/^-+|-+$/g, '') : 'company';
+    return slug || 'company';
+  }
+  function downloadGaugePng() {
+    const wrap = document.getElementById('gaugeWrap');
+    const svg = wrap ? wrap.querySelector('svg') : null;
+    if (!svg) { alert('請先計算，產生儀表圖後再下載'); return; }
+    const xml = new XMLSerializer().serializeToString(svg);
+    const svg64 = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(xml);
+    const img = new Image();
+    img.onload = () => {
+      // 以 viewBox 解析原始尺寸
+      let w = 900, h = 480;
+      const vb = svg.getAttribute('viewBox');
+      if (vb) { const p = vb.split(/\s+/); if (p.length === 4) { w = +p[2]; h = +p[3]; } }
+      const scale = Math.max(1200 / w, 2); // 至少 1.2K 或 2x
+      const canW = Math.round(w * scale), canH = Math.round(h * scale);
+      const canvas = document.createElement('canvas');
+      canvas.width = canW; canvas.height = canH;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#ffffff'; ctx.fillRect(0,0,canW,canH);
+      ctx.drawImage(img, 0, 0, canW, canH);
+      const url = canvas.toDataURL('image/png');
+      const a = document.createElement('a'); a.href = url; a.download = `${companySlug()}_gauge.png`; a.click();
+    };
+    img.src = svg64;
+  }
+
+  // 將任意 DOM 轉為 PNG（使用 foreignObject 包裝成 SVG）
+  function downloadNodePng(node, filename) {
+    const rect = node.getBoundingClientRect();
+    const w = Math.ceil(rect.width), h = Math.ceil(rect.height);
+    const scale = Math.max(1200 / w, 2);
+    const style = `
+      <style>
+        *{box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans TC',Arial,sans-serif;}
+        table{border-collapse:collapse;width:100%;}
+        th,td{padding:6px 8px;border-bottom:1px solid #eee;text-align:right;font-size:12px;}
+        th:first-child,td:first-child{text-align:left;}
+        tbody tr:nth-child(odd){background:#f9fafb;}
+        tbody tr:nth-child(even){background:#ffffff;}
+      </style>`;
+    const data = `<?xml version="1.0" encoding="UTF-8"?>
+      <svg xmlns="http://www.w3.org/2000/svg" width="${w*scale}" height="${h*scale}">
+        <foreignObject width="100%" height="100%">
+          <div xmlns="http://www.w3.org/1999/xhtml" style="background:#fff;width:${w*scale}px;height:${h*scale}px;">
+            ${style}
+            <div style="transform:scale(${scale});transform-origin:top left;width:${w}px;height:${h}px;">
+              ${node.outerHTML}
+            </div>
+          </div>
+        </foreignObject>
+      </svg>`;
+    const url = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(data);
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.round(w*scale); canvas.height = Math.round(h*scale);
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#ffffff'; ctx.fillRect(0,0,canvas.width,canvas.height);
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      const out = canvas.toDataURL('image/png');
+      const a = document.createElement('a'); a.href = out; a.download = filename; a.click();
+    };
+    img.src = url;
+  }
+
+  const btnGauge = document.getElementById('btnSaveGauge');
+  if (btnGauge) btnGauge.addEventListener('click', downloadGaugePng);
+  const btnTable = document.getElementById('btnSaveTable');
+  if (btnTable) btnTable.addEventListener('click', () => {
+    const node = document.getElementById('projectionTable');
+    if (!node || !node.firstElementChild) { alert('請先計算生成表格'); return; }
+    downloadNodePng(node.firstElementChild, `${companySlug()}_fcf-table.png`);
+  });
 });
