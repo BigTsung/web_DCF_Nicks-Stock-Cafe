@@ -14,100 +14,96 @@
 
     <main class="container">
       <section class="grid">
-        <div class="grid-left">
+        <!-- 左：估值模型假設（span-6） -->
+        <div class="section-card span-6">
           <h3 class="form-section">估值模型假設</h3>
           <div class="group">
-          <div class="row header green" id="companyRow">
-            <label for="company"><strong>Company</strong></label>
-            <input id="company" type="text" placeholder="公司名稱" />
-          </div>
-
-          <div class="row green" id="g15Row">
-            <label for="g15">未來成長率（1~5年）%</label>
-            <input id="g15" type="number" step="0.1" placeholder="例如 12" />
-          </div>
-
-          <div class="row green" id="gperpRow">
-            <label for="gperp">永久成長率（終值）%</label>
-            <input id="gperp" type="number" step="0.1" placeholder="例如 2.5" />
-          </div>
-
-          <div class="row yellow" id="waccRow">
-            <label for="wacc">折現率（WACC）%</label>
-            <input id="wacc" type="number" step="0.1" placeholder="例如 10" />
-          </div>
-
-          <div class="row green" id="reqReturnRow">
-            <label for="reqReturn">期望折現率（期望收益率）%（可選）</label>
-            <input id="reqReturn" type="number" step="0.1" placeholder="可留空" />
-          </div>
-
-          <div class="row yellow" id="hist5Row">
-            <label for="hist5">過去五年成長率（資訊）%</label>
-            <input id="hist5" type="number" step="0.1" placeholder="可留空" />
-          </div>
-
-          <div class="row blue" id="g610Row">
-            <label for="g610">二階成長率（6~10年）%</label>
-            <input id="g610" type="number" step="0.1" placeholder="例如 6" />
-          </div>
+            <div class="row header green" id="companyRow">
+              <label for="company"><strong>Company</strong></label>
+              <input id="company" type="text" placeholder="公司名稱" />
+            </div>
+            <div class="row green" id="g15Row">
+              <label for="g15">未來成長率（1~5年）%</label>
+              <input id="g15" type="number" step="0.1" placeholder="例如 12" />
+            </div>
+            <div class="row green" id="gperpRow">
+              <label for="gperp">永久成長率（終值）%</label>
+              <input id="gperp" type="number" step="0.1" placeholder="例如 2.5" />
+            </div>
+            <div class="row yellow" id="waccRow">
+              <label for="wacc">折現率（WACC）%</label>
+              <input id="wacc" type="number" step="0.1" placeholder="例如 10" />
+            </div>
+            <div class="row green" id="reqReturnRow">
+              <label for="reqReturn">期望折現率（期望收益率）%（可選）</label>
+              <input id="reqReturn" type="number" step="0.1" placeholder="可留空" />
+            </div>
+            <div class="row yellow" id="hist5Row">
+              <label for="hist5">過去五年成長率（資訊）%</label>
+              <input id="hist5" type="number" step="0.1" placeholder="可留空" />
+            </div>
+            <div class="row blue" id="g610Row">
+              <label for="g610">二階成長率（6~10年）%</label>
+              <input id="g610" type="number" step="0.1" placeholder="例如 6" />
+            </div>
           </div>
         </div>
 
-        <div class="grid-right">
+        <!-- 右：財務基準與成長假設（span-6） -->
+        <div class="section-card span-6">
           <h3 class="form-section">財務基準與成長假設</h3>
           <div class="group">
-          <div class="row header green" id="revenueRow">
-            <label for="revenue"><strong>TTM Revenue</strong></label>
-            <input id="revenue" type="number" step="0.01" placeholder="營收（同幣別）" />
+            <div class="row header green" id="revenueRow">
+              <label for="revenue"><strong>TTM Revenue</strong></label>
+              <input id="revenue" type="number" step="0.01" placeholder="營收（同幣別）" />
+            </div>
+            <div class="row green" id="revG15Row">
+              <label for="revG15">營收成長（y1-5）%</label>
+              <input id="revG15" type="number" step="0.1" placeholder="例如 12" />
+            </div>
+            <div class="row green" id="revG610Row">
+              <label for="revG610">營收成長（y6-10）%</label>
+              <input id="revG610" type="number" step="0.1" placeholder="例如 6" />
+            </div>
+            <div class="row yellow" id="fcfMarginRow">
+              <label for="fcfMargin">ATH FCF M（自由現金流率）%</label>
+              <input id="fcfMargin" type="number" step="0.1" placeholder="例如 20" />
+            </div>
+            <!-- 補齊空白列，讓本區與左側欄位數一致（共 7 列） -->
+            <div class="row placeholder"><label></label><input type="text" disabled aria-hidden="true" /></div>
+            <div class="row placeholder"><label></label><input type="text" disabled aria-hidden="true" /></div>
+            <div class="row placeholder"><label></label><input type="text" disabled aria-hidden="true" /></div>
           </div>
+        </div>
 
-          <div class="row green" id="revG15Row">
-            <label for="revG15">營收成長（y1-5）%</label>
-            <input id="revG15" type="number" step="0.1" placeholder="例如 12" />
-          </div>
-
-          <div class="row green" id="revG610Row">
-            <label for="revG610">營收成長（y6-10）%</label>
-            <input id="revG610" type="number" step="0.1" placeholder="例如 6" />
-          </div>
-
-          <div class="row yellow" id="fcfMarginRow">
-            <label for="fcfMargin">ATH FCF M（自由現金流率）%</label>
-            <input id="fcfMargin" type="number" step="0.1" placeholder="例如 20" />
-          </div>
-          </div>
-
+        <!-- 下：股權價值計算參數（span-12） -->
+        <div class="section-card span-12">
           <h3 class="form-section">股權價值計算參數</h3>
           <div class="group">
-          <div class="row green" id="fcfYear1Row">
-            <label for="fcfYear1">自由現金流（第一年，手動）</label>
-            <input id="fcfYear1" type="number" step="0.01" placeholder="例如 413.7" />
-          </div>
-          <div class="row pink" id="cashRow">
-            <label for="cash">現金及其他投資</label>
-            <input id="cash" type="number" step="0.01" placeholder="可留空=0" />
-          </div>
-
-          <div class="row pink" id="debtRow">
-            <label for="debt">總負債</label>
-            <input id="debt" type="number" step="0.01" placeholder="可留空=0" />
-          </div>
-
-          <div class="row pink" id="sharesRow">
-            <label for="shares">流通在外股數</label>
-            <input id="shares" type="number" step="0.0001" placeholder="例如 1000000000" />
-          </div>
-
-          <div class="row pink" id="startYearRow">
-            <label for="startYear">起始年份</label>
-            <input id="startYear" type="number" step="1" value="" placeholder="預設為今年" />
-          </div>
-
-          <div class="row pink" id="marketPriceRow">
-            <label for="marketPrice">股票當前價格</label>
-            <input id="marketPrice" type="number" step="0.01" placeholder="可留空" />
-          </div>
+            <div class="row green" id="fcfYear1Row">
+              <label for="fcfYear1">自由現金流（第一年，手動）</label>
+              <input id="fcfYear1" type="number" step="0.01" placeholder="例如 413.7" />
+            </div>
+            <div class="row pink" id="cashRow">
+              <label for="cash">現金及其他投資</label>
+              <input id="cash" type="number" step="0.01" placeholder="可留空=0" />
+            </div>
+            <div class="row pink" id="debtRow">
+              <label for="debt">總負債</label>
+              <input id="debt" type="number" step="0.01" placeholder="可留空=0" />
+            </div>
+            <div class="row pink" id="sharesRow">
+              <label for="shares">流通在外股數</label>
+              <input id="shares" type="number" step="0.0001" placeholder="例如 1000000000" />
+            </div>
+            <div class="row pink" id="startYearRow">
+              <label for="startYear">起始年份</label>
+              <input id="startYear" type="number" step="1" value="" placeholder="預設為今年" />
+            </div>
+            <div class="row pink" id="marketPriceRow">
+              <label for="marketPrice">股票當前價格</label>
+              <input id="marketPrice" type="number" step="0.01" placeholder="可留空" />
+            </div>
           </div>
         </div>
       </section>
