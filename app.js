@@ -114,9 +114,10 @@ function renderGauge(fair, market) {
 
   const mos = (fair - market) / market;
   const mosColor = mos >= 0 ? '#16a34a' : '#ef4444';
-  const caption = `<div class="caption" style="font-size:22px">Margin of Safety: <span style="color:${mosColor}">${(mos*100).toFixed(2)}%</span></div>`;
+  // const caption = `<div class="caption" style="font-size:22px">Margin of Safety: <span style="color:${mosColor}">${(mos*100).toFixed(2)}%</span></div>`;
 
-  wrap.innerHTML = svg + caption;
+  // wrap.innerHTML = svg + caption;
+  wrap.innerHTML = svg;
   wrap.classList.remove('hidden');
 }
 
