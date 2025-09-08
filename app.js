@@ -335,12 +335,11 @@ function calculateDCF() {
     if (wrap) wrap.classList.add('hidden');
   }
 
-  // 計算後自動展開明細並滾動至該區
+  // 計算後自動展開明細，並捲動到「結果」區塊頂部
   const det = document.getElementById('projectionsDetails');
-  if (det) {
-    det.open = true;
-    det.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
+  if (det) det.open = true;
+  const resultsEl = document.getElementById('results');
+  if (resultsEl) resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function resetAll() {

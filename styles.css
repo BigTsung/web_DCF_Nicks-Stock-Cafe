@@ -58,21 +58,22 @@ h1 { margin: 16px 0 4px; }
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   gap: 12px;
-  align-items: flex-start; /* 兩欄頂端對齊 */
+  align-items: center; /* 兩欄垂直置中對齊 */
   min-height: 56px; /* 等高 */
   padding: 10px 12px;
   border-radius: 8px;
 }
 
-.row label { font-size: 14px; display: flex; align-items: flex-start; height: auto; padding-top: 0; }
+.row label { font-size: 14px; font-weight: 600; display: flex; align-items: center; height: 42px; padding-top: 0; }
+.row label.label-required::after { content: " *"; color: #dc2626; font-weight: 700; margin-left: 2px; }
 .row input {
   width: 100%;
   padding: 8px 10px;
   border: 1px solid #ddd;
   border-radius: 6px;
   font-size: 14px;
-  height: 42px; /* 固定欄位高度，頂端對齊 */
-  align-self: flex-start;
+  height: 42px; /* 與標題同高，垂直置中 */
+  align-self: center;
 }
 
 /* 補齊空白列外觀：保留高度但不顯示邊框與底色 */
