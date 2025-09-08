@@ -260,3 +260,27 @@ table.proj thead th {
 /* 保險：任何 SVG/圖片都不要超出容器 */
 img, svg { max-width: 100%; height: auto; }
 
+/* 讓投射表格區在窄螢幕能橫向滑動，不撐破版面 */
+.projections {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+#projectionTable {
+  overflow-x: auto;
+}
+table.proj {
+  min-width: 680px; /* 可依喜好調整 640~760 之間 */
+}
+
+/* 極窄螢幕再加強：避免任何水平捲動由整頁承擔 */
+@media (max-width: 480px) {
+  html, body { overflow-x: hidden; }
+  .container { padding: 12px; }
+}
+
+/* 手機端不用顯示右欄的空白佔位列 */
+@media (max-width: 820px) {
+  .row.placeholder {
+    display: none;
+  }
+}
